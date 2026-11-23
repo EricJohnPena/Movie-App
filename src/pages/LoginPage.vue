@@ -80,25 +80,109 @@ onBeforeMount(() => {
 </script>
 
 <template>
-	<div class="container-fluid">
-		<h1 class="my-5 pt-3 text-primary text-center">Login Page</h1>
-		<div class="row d-flex justify-content-center">
-			<div class="col-md-5 border rounded-3 mx-auto p-5">
-				<form v-on:submit="handleSubmit">
-					<div class="mb-3">
-						<label for="emailInput" class="form-label">Email Address</label>
-						<input type="email" class="form-control" id="emailInput" v-model="email" />
-					</div>
-					<div class="mb-3">
-						<label for="passwordInput" class="form-label">Password</label>
-						<input type="password" class="form-control" id="passwordInput" v-model="password" />
-					</div>
-					<div class="d-grid mt-5">
-						<button type="submit" class="btn btn-primary " v-if="isEnabled">Login</button>
-						<button type="submit" class="btn btn-info " disabled v-else>Login</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+    <div class="cine-auth-wrapper">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-7 col-lg-5 col-xl-4">
+                    <div class="cine-card p-4 p-sm-5">
+                        <!-- Header -->
+                        <div class="text-center mb-4">
+                            <div class="cine-brand-badge mb-3">
+                                <i class="bi bi-film"></i>
+                            </div>
+                            <h1 class="h3 fw-bold cine-gradient-text mb-1">Welcome Back</h1>
+                            <p class="text-secondary small mb-0">
+                                Sign in to explore movies and join the discussion
+                            </p>
+                        </div>
+
+                        <!-- Form -->
+                        <form @submit.prevent="handleSubmit" novalidate>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label small fw-semibold text-light">
+                                    Email Address
+                                </label>
+                                <div class="input-group cine-input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="emailInput"
+                                        v-model="email"
+                                        placeholder="you@example.com"
+                                        autocomplete="email"
+                                        :disabled="isLoading"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="passwordInput" class="form-label small fw-semibold text-light">
+                                    Password
+                                </label>
+                                <div class="input-group cine-input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <input
+                                        :type="showPassword ? 'text' : 'password'"
+                                        class="form-control"
+                                        id="passwordInput"
+                                        v-model="password"
+                                        placeholder="Enter your password"
+                                        autocomplete="current-password"
+                                        :disabled="isLoading"
+                                        required
+                                    />
+                                    <button
+                                        type="button"
+                                        class="btn cine-toggle-btn"
+                                        @click="showPassword = !showPassword"
+                                        :aria-label="showPassword ? 'Hide password' : 'Show password'"
+                                        tabindex="-1"
+                                    >
+                                        <i :class="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button
+                                    type="submit"
+                                    class="btn btn-cine-primary d-flex align-items-center justify-content-center gap-2"
+                                    :disabled="!isEnabled || isLoading"
+                                >
+                                    <span
+                                        v-if="isLoading"
+                                        class="spinner-border spinner-border-sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                    ></span>
+                                    <i v-else class="bi bi-box-arrow-in-right"></i>
+                                    <span>{{ isLoading ? "Signing in..." : "Sign In" }}</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Footer Link -->
+                        <div class="text-center mt-4 pt-3 border-top border-secondary border-opacity-25">
+                            <p class="small text-secondary mb-0">
+                                Don't have an account?
+                                <router-link
+                                    to="/register"
+                                    class="text-decoration-none fw-semibold ms-1"
+                                    style="color: var(--cine-accent)"
+                                >
+                                    Create one
+                                </router-link>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
