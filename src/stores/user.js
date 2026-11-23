@@ -18,7 +18,11 @@ export const useGlobalStore = defineStore('user', () => {
         }
 
         try {
-            let { data } = await api.get("/users/details");
+            let { data } = await api.get("/users/details", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             
 
             const userData = data.user || data;

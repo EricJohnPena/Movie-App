@@ -11,14 +11,16 @@ import App from './App.vue';
 
 import LoginPage from './pages/LoginPage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
+import MovieCatalog from './pages/MovieCatalog.vue';
+import ViewMovie from './pages/ViewMovie.vue';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        // {
-        //     path:"/",
-        //     redirect: "/movies"
-        // },
+        {
+            path:"/",
+            redirect: "/movies"
+        },
         {
             path:"/login",
             name: 'Login',
@@ -28,7 +30,18 @@ const router = createRouter({
             path: "/register",
             name: "Register",
             component: RegisterPage
+        },
+        {
+            path: "/movies",
+            name: "Movies",
+            component: MovieCatalog
+        },
+        {
+            path: "/movies/:id",
+            name: "View Movie",
+            component: ViewMovie
         }
+        
     ]
 });
 

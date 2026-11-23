@@ -14,6 +14,7 @@
                 <div class="navbar-nav ms-auto">
                     <!-- <router-link :to="{ name: 'Profile' }" class="nav-link" v-if="store.user?.email">Profile</router-link>
                 -->
+                    <!-- <router-link :to="{ name: 'Admin' }" class="nav-link" v-if="store.user?.isAdmin">Admin Dashboard</router-link> -->
 
                     <router-link :to="{ name: 'Register' }" class="nav-link" v-if="!store.user?.email">Register</router-link>
                     <router-link :to="{ name: 'Login' }" class="nav-link" v-if="!store.user?.email">Login</router-link>

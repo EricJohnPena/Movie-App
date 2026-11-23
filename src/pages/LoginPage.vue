@@ -32,28 +32,39 @@ async function handleSubmit(e) {
 			password: password.value,
 		});
 
-		if (res.data) {
-			// Fallback to a default string if res.data.message doesn't exist
+
+
+		const myToken =
+			res.data?.access ||
+			res.data?.token ||
+			res.data?.accessToken ||
+			res.data?.data?.token;
+
+		if (myToken) {
 			const successMessage = res.data.message || "Login Successful!";
 			notyf.success(successMessage);
 
-			// Check for 'access' or 'token'
-			const myToken = res.data.access || res.data.token;
 			localStorage.setItem("token", myToken);
 
-			await getUserDetails();
+			await getUserDetails(myToken);
 
 			email.value = "";
 			password.value = "";
 
 			router.push({ path: "/" });
+		} else {
+			console.warn("No token found in response:", res.data);
+			notyf.error(res.data?.message || "Login succeeded, but no token was returned.");
 		}
 	} catch (e) {
-		console.error("Login Error Details:", e); 
-		
-		if (e.response && (e.response.status === 404 || e.response.status === 401 || e.response.status === 400)) {
-			// Check for .message first, then fallback to .error
-			const errorMessage = e.response.data.message || e.response.data.error || "Invalid Credentials";
+		console.error("Login Error Details:", e);
+
+		if (
+			e.response &&
+			(e.response.status === 404 || e.response.status === 401 || e.response.status === 400)
+		) {
+			const errorMessage =
+				e.response.data?.message || e.response.data?.error || "Invalid Credentials";
 			notyf.error(errorMessage);
 		} else {
 			notyf.error("Login Failed. Please Contact Administrator");
