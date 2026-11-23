@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage.vue';
 import RegisterPage from './pages/RegisterPage.vue';
 import MovieCatalog from './pages/MovieCatalog.vue';
 import ViewMovie from './pages/ViewMovie.vue';
+import AddMovie from './pages/AddMovie.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -40,6 +41,11 @@ const router = createRouter({
             path: "/movies/:id",
             name: "View Movie",
             component: ViewMovie
+        },
+        {
+            path: "/addMovie",
+            name: "Add Movie",
+            component: AddMovie
         }
         
     ]

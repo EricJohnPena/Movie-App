@@ -3,9 +3,9 @@
         <h1 class="text-center text-primary mt-5 mb-4">Admin Dashboard</h1>
 
         <div class="d-flex justify-content-end mb-3">
-            <!-- <router-link :to="{ name: 'Add Movie' }" class="btn btn-primary">
+            <router-link :to="{ name: 'Add Movie' }" class="btn btn-primary">
                 + Add Movie
-            </router-link> -->
+            </router-link>
         </div>
 
         <table class="table table-striped border align-middle">
